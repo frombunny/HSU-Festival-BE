@@ -1,9 +1,7 @@
 package hsd.hsu_festival_2025.global.exception;
 
-
-import Sprout_Squad.EyeOn.global.auth.exception.UserNotFoundException;
-import Sprout_Squad.EyeOn.global.response.ErrorResponse;
-import Sprout_Squad.EyeOn.global.response.code.GlobalErrorCode;
+import hsd.hsu_festival_2025.global.response.ErrorResponse;
+import hsd.hsu_festival_2025.global.response.code.GlobalErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -69,18 +67,6 @@ public class GlobalExceptionHandler {
         log.error("BusinessError ");
         log.error(e.getErrorCode().getMessage());
         ErrorResponse error = ErrorResponse.of(e.getErrorCode());
-        return ResponseEntity.status(error.getHttpStatus()).body(error);
-    }
-
-    /* 카카오 로그인을 위한 UserNotFoundException 에러 처리 */
-    @ExceptionHandler(UserNotFoundException.class)
-    private ResponseEntity<ErrorResponse> handleUserNotFoundException(UserNotFoundException e) {
-        log.error("UserNotFoundException error", e.getErrorCode().getMessage());
-        ErrorResponse error = ErrorResponse.of(
-                e.getErrorCode(),
-                e.getErrorCode().getMessage(),
-                e.getExtra()
-        );
         return ResponseEntity.status(error.getHttpStatus()).body(error);
     }
 

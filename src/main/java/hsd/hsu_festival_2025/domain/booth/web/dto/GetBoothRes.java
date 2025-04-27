@@ -1,0 +1,9 @@
+package hsd.hsu_festival_2025.domain.booth.web.dto;
+
+public record GetBoothRes(
+        Long id,
+        String name,
+        String time,
+        String description
+) {
+}

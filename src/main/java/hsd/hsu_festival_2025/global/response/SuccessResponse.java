@@ -22,8 +22,12 @@ public class SuccessResponse<T> extends BaseResponse{
     }
 
     // 200 OK 응답
-    public static <T> SuccessResponse<T> of(T data) {
+    public static <T> SuccessResponse<T> from(T data) {
         return new SuccessResponse<>(data, GlobalSuccessCode.SUCCESS_OK);
+    }
+
+    public static <T> SuccessResponse<T> empty() {
+        return new SuccessResponse<>(null, GlobalSuccessCode.SUCCESS_OK);
     }
 
     public static <T> SuccessResponse<T> of(T data, BaseResponseCode baseResponseCode) {
