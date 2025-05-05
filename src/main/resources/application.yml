@@ -16,3 +16,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+# openai key
+openai:
+  key: ${OPENAI_API_KEY}
