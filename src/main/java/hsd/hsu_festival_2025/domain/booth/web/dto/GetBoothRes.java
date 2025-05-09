@@ -4,6 +4,7 @@ public record GetBoothRes(
         Long id,
         String name,
         String time,
-        String description
+        String description,
+        String imageUrl
 ) {
 }

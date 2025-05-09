@@ -10,7 +10,9 @@ import hsd.hsu_festival_2025.global.response.SuccessResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -20,14 +22,18 @@ public class BoothController {
     private final BoothService boothService;
 
     @PostMapping
-    public SuccessResponse<Void> saveBooth(@RequestBody @Valid SaveBoothReq saveBoothReq) {
-        boothService.saveBooth(saveBoothReq);
+    public SuccessResponse<Void> saveBooth(
+            @RequestPart("data") @Valid SaveBoothReq saveBoothReq,
+            @RequestPart("file") MultipartFile file) throws IOException {
+        boothService.saveBooth(saveBoothReq, file);
         return SuccessResponse.empty();
     }
 
     @PutMapping("/{boothId}")
-    public SuccessResponse<Void> updateBooth(@PathVariable Long boothId, @RequestBody @Valid UpdateBoothReq updateBoothReq) {
-        boothService.updateBooth(boothId, updateBoothReq);
+    public SuccessResponse<Void> updateBooth(@PathVariable Long boothId,
+                                             @RequestPart("data") @Valid UpdateBoothReq updateBoothReq,
+                                             @RequestPart("file") MultipartFile file) throws IOException {
+        boothService.updateBooth(boothId, updateBoothReq, file);
         return SuccessResponse.empty();
     }
 

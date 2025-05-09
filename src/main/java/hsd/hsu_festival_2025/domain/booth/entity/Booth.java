@@ -30,19 +30,24 @@ public class Booth {
     @Column (name = "time", nullable = false)
     private String time;
 
-    public void updateBooth(UpdateBoothReq updateBoothReq) {
+    @Column (name = "image_url")
+    private String imageUrl;
+
+    public void updateBooth(UpdateBoothReq updateBoothReq, String fileUrl) {
         this.type = updateBoothReq.type();
         this.name = updateBoothReq.name();
         this.description = updateBoothReq.description();
         this.time = updateBoothReq.time();
+        this.imageUrl = fileUrl;
     }
 
-    public static Booth toEntity(SaveBoothReq saveBoothReq) {
+    public static Booth toEntity(SaveBoothReq saveBoothReq, String fileUrl) {
         return Booth.builder()
                 .type(saveBoothReq.type())
                 .name(saveBoothReq.name())
                 .description(saveBoothReq.description())
                 .time(saveBoothReq.time())
+                .imageUrl(fileUrl)
                 .build();
     }
 }
