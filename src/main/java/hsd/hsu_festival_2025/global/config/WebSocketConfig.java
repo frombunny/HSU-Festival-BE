@@ -23,7 +23,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         System.out.println("✅ registerStompEndpoints 실행됨");
         // /ws/community 경로로 들어오는 웹소켓 요청을 CommunityWebSocketHandler로 처리
         registry.addEndpoint("/ws/community")
-                .setAllowedOrigins("http://localhost:3000")
+                .setAllowedOrigins("http://localhost:3000", "http://localhost:5173")
                 .setHandshakeHandler(new CustomHandshakeHandler())
                 .addInterceptors(socketInterceptor)
                 .withSockJS();
