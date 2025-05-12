@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     /*
         javax.validation.Valid or @Validated 으로 binding error 발생시 발생
         주로 @RequestBody, @RequestPart 어노테이션에서 발생
-        */
+    */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     private ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error("MethodArgumentNotValidException Error", e);
@@ -84,7 +84,6 @@ public class GlobalExceptionHandler {
         log.warn("📡 대상 유저: {}", principal != null ? principal.getName() : "null");
         return Map.of("message", e.getErrorCode().getMessage());
     }
-
 
 
     /* 나머지 예외 처리 */
