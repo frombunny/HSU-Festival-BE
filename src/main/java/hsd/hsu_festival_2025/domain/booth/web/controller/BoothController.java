@@ -1,6 +1,5 @@
 package hsd.hsu_festival_2025.domain.booth.web.controller;
 
-import hsd.hsu_festival_2025.domain.booth.entity.Booth;
 import hsd.hsu_festival_2025.domain.booth.entity.enums.BoothType;
 import hsd.hsu_festival_2025.domain.booth.service.BoothService;
 import hsd.hsu_festival_2025.domain.booth.web.dto.GetBoothRes;

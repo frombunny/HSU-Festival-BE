@@ -56,6 +56,7 @@ public class BoothServiceImpl implements BoothService {
         return boothList.stream()
                 .map(booth -> new GetBoothRes(
                         booth.getId(),
+                        booth.getBoothNum(),
                         booth.getName(),
                         booth.getTime(),
                         booth.getDescription(),

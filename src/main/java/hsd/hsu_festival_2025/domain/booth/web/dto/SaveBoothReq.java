@@ -9,6 +9,9 @@ public record SaveBoothReq(
         @NotNull(message = "부스 종류는 필수입니다.")
         BoothType type,
 
+        @NotNull(message = "부스 번호는 필수입니다.")
+        Long boothNum,
+
         @NotBlank(message = "부스 이름은 필수입니다.")
         String name,
 

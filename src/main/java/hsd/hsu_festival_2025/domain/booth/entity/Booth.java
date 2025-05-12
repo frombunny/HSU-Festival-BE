@@ -17,6 +17,9 @@ public class Booth {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "boothNum", nullable = false)
+    private Long boothNum;
+
     @Enumerated(EnumType.STRING)
     @Column (name = "type", nullable = false)
     private BoothType type;
@@ -35,6 +38,7 @@ public class Booth {
 
     public void updateBooth(UpdateBoothReq updateBoothReq, String fileUrl) {
         this.type = updateBoothReq.type();
+        this.boothNum = updateBoothReq.boothNum();
         this.name = updateBoothReq.name();
         this.description = updateBoothReq.description();
         this.time = updateBoothReq.time();
@@ -44,6 +48,7 @@ public class Booth {
     public static Booth toEntity(SaveBoothReq saveBoothReq, String fileUrl) {
         return Booth.builder()
                 .type(saveBoothReq.type())
+                .boothNum(saveBoothReq.boothNum())
                 .name(saveBoothReq.name())
                 .description(saveBoothReq.description())
                 .time(saveBoothReq.time())
