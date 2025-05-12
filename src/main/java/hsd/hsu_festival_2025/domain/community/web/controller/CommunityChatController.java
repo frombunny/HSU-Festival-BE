@@ -14,6 +14,9 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
+import java.time.format.DateTimeFormatter;
+
+import static java.time.LocalTime.now;
 
 
 @Controller
@@ -26,6 +29,7 @@ public class CommunityChatController {
 
     @MessageMapping("/chat.send") // 클랑이언트 : /pub/chat.send
     public void sendMessage(CommunityMessageReq req, Principal principal){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         String senderId = principal.getName();
 
@@ -34,6 +38,6 @@ public class CommunityChatController {
         communityMessageService.sendChat(senderId, req);
 
         messagingTemplate.convertAndSend("/sub/chat/public", new CommunityMessageRes(
-                req.username(), req.content(), senderId));
+                req.username(), req.content(), senderId, now().format(formatter)));
     }
 }

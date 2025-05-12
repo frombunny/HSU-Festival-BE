@@ -4,7 +4,7 @@ public record CommunityMessageRes(
         String username,
         String content,
         String senderId, // 발신자 userid
-        String date
+        String time
 
 ) {
 }
