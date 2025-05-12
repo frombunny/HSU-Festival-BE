@@ -14,6 +14,7 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static java.time.LocalTime.now;
@@ -38,6 +39,6 @@ public class CommunityChatController {
         communityMessageService.sendChat(senderId, req);
 
         messagingTemplate.convertAndSend("/sub/chat/public", new CommunityMessageRes(
-                req.username(), req.content(), senderId, now().format(formatter)));
+                req.username(), req.content(), senderId, LocalDateTime.now().format(formatter)));
     }
 }
