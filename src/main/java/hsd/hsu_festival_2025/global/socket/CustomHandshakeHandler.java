@@ -9,18 +9,14 @@ import java.util.Map;
 
 public class CustomHandshakeHandler extends DefaultHandshakeHandler {
     @Override
-    protected Principal determineUser(
-            ServerHttpRequest request,
-            WebSocketHandler wsHandler,
-            Map<String, Object> attributes) {
-
+    protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {
         String userId = (String) attributes.get("user_id");
-
+        System.out.println("🧩 HandshakeHandler: user_id = " + userId);
         if (userId != null && !userId.isBlank()) {
             return () -> userId;
         }
-
-        // 익명 사용자 or 인증 실패 처리 (예: null 리턴 → WebSocket 거부)
+        System.out.println("❌ Principal 생성 실패. user_id 없음.");
         return null;
     }
+
 }

@@ -20,21 +20,25 @@ public class SocketInterceptor implements HandshakeInterceptor {
                                    WebSocketHandler wsHandler,
                                    Map<String, Object> attributes) throws Exception {
         // Servlet 요청으로 캐스팅
-        if(request instanceof ServletServerHttpRequest servletServerHttpRequest){
-            HttpServletRequest httpServletRequest = servletServerHttpRequest.getServletRequest();
+        if (request instanceof ServletServerHttpRequest servletRequest) {
+            HttpServletRequest httpServletRequest = servletRequest.getServletRequest();
             Cookie[] cookies = httpServletRequest.getCookies();
 
-            if(cookies != null){
-                for(Cookie cookie : cookies){
-                    if(cookie.getName().equals("user_id")){
-                        // WebSocket 세션 attribute에 user_id 저장
+            System.out.println("🔍 쿠키 확인:");
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    System.out.println("- " + cookie.getName() + "=" + cookie.getValue());
+                    if ("user_id".equals(cookie.getName())) {
                         attributes.put("user_id", cookie.getValue());
-                        break;
+                        System.out.println("✅ user_id 쿠키 세팅됨: " + cookie.getValue());
                     }
                 }
-
+            } else {
+                System.out.println("❌ cookies == null");
             }
         }
+
+
         return true;
     }
 
