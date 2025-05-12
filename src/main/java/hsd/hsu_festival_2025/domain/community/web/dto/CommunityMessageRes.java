@@ -1,10 +1,16 @@
 package hsd.hsu_festival_2025.domain.community.web.dto;
 
-public record CommunityMessageRes(
-        String username,
-        String content,
-        String senderId, // 발신자 userid
-        String time
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-) {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CommunityMessageRes {
+    private String username;
+    private String content;
+    private String senderId;
+    private String time;
 }
+
