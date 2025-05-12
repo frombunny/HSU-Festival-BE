@@ -37,6 +37,7 @@ public class CommunityChatController {
             return;
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        System.out.println("📦 userId in payload: " + req.userId());
 
         if(badWordValidator.containsBadWord(req.content())) throw new BadWordException();
 

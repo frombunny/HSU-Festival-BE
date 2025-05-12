@@ -21,40 +21,20 @@ public class ConnectedUserTracker  {
     @Getter
     private final Set<String> connectedUserIds = ConcurrentHashMap.newKeySet();
 
-//    @EventListener
-//    public void handleConnect(SessionConnectedEvent event) { // 연결 발생 시
-//        // 세션 정보 접근
-//        StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage());
-//
-//        if (accessor.getSessionAttributes() == null) {
-//            log.warn("세션 attribute가 null임");
-//            return; // 이거 없으면 NullPointerException
-//        }
-//
-//        String sessionId = accessor.getSessionId();
-//        // SocketInterceptor에서 저장한 세션 attribute
-//        String userId = (String) accessor.getSessionAttributes().get("user_id");
-//
-//        if (userId != null) {
-//            sessionIdToUserId.put(sessionId, userId);
-//            connectedUserIds.add(userId); // 접속자 목록에 추가
-//            log.info("WebSocket 연결: session={}, userId={}", sessionId, userId);
-//        }
-//    }
-@EventListener
-public void handleConnect(SessionConnectedEvent event) {
-    StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage());
-    String sessionId = accessor.getSessionId();
+    @EventListener
+    public void handleConnect(SessionConnectedEvent event) {
+        StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage());
+        String sessionId = accessor.getSessionId();
 
-    if (accessor.getUser() == null) {
-        log.warn("❌ Principal이 null입니다.");
-        return;
-    }
+        if (accessor.getUser() == null) {
+            log.warn("❌ Principal이 null입니다.");
+            return;
+        }
 
-    String userId = accessor.getUser().getName(); // CustomHandshakeHandler에서 생성한 Principal 기반
-    sessionIdToUserId.put(sessionId, userId);
-    connectedUserIds.add(userId);
-    log.info("✅ WebSocket 연결: session={}, userId={}", sessionId, userId);
+        String userId = accessor.getUser().getName(); // CustomHandshakeHandler에서 생성한 Principal 기반
+         sessionIdToUserId.put(sessionId, userId);
+         connectedUserIds.add(userId);
+         log.info("✅ WebSocket 연결: session={}, userId={}", sessionId, userId);
 }
 
 
