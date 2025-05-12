@@ -30,9 +30,13 @@ public class CommunityChatController {
 
     @MessageMapping("/chat.send") // 클랑이언트 : /pub/chat.send
     public void sendMessage(CommunityMessageReq req, Principal principal){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String senderId = (principal != null) ? principal.getName() : req.userId();
 
-        String senderId = principal.getName();
+        if (senderId == null || senderId.isBlank()) {
+            System.out.println("❌ senderId 없음 → 메시지 무시");
+            return;
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         if(badWordValidator.containsBadWord(req.content())) throw new BadWordException();
 
