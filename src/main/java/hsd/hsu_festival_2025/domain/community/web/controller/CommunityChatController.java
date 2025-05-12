@@ -43,7 +43,10 @@ public class CommunityChatController {
 
         communityMessageService.sendChat(senderId, req);
 
+        System.out.println("📢 메시지 브로커로 송신 시작");
         messagingTemplate.convertAndSend("/sub/chat/public", new CommunityMessageRes(
                 req.username(), req.content(), senderId, LocalDateTime.now().format(formatter)));
+        System.out.println("✅ convertAndSend 호출 완료");
+
     }
 }
