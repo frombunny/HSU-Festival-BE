@@ -10,6 +10,7 @@ import hsd.hsu_festival_2025.global.validator.BadWordValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,12 +31,13 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
 
     @Override
     public List<CommunityMessageRes> getRecentMessages(String userId) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return communityChatRepository.findTop100ByOrderByCreatedAtDesc().stream()
                 .map(msg -> new CommunityMessageRes(
                         msg.getUsername(),
                         msg.getContent(),
-                        msg.getUserId()
-
+                        msg.getUserId(),
+                        msg.getCreatedAt().format(formatter)
                 ))
                 .toList();
     }
