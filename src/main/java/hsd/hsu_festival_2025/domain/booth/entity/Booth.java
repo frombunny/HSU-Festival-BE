@@ -18,7 +18,7 @@ public class Booth {
     private Long id;
 
     @Column(name = "boothNum", nullable = false)
-    private Long boothNum;
+    private String boothNum;
 
     @Enumerated(EnumType.STRING)
     @Column (name = "type", nullable = false)

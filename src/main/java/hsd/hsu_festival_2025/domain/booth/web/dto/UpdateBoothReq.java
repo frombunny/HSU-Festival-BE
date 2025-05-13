@@ -9,7 +9,7 @@ public record UpdateBoothReq(
         BoothType type,
 
         @NotNull(message = "부스 번호는 필수입니다.")
-        Long boothNum,
+        String boothNum,
 
         @NotBlank(message = "부스 이름은 필수입니다.")
         String name,
