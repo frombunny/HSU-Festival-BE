@@ -3,6 +3,7 @@ package hsd.hsu_festival_2025.global.exception;
 import hsd.hsu_festival_2025.global.response.ErrorResponse;
 import hsd.hsu_festival_2025.global.response.code.GlobalErrorCode;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
@@ -91,7 +92,11 @@ public class GlobalExceptionHandler {
     private ResponseEntity<ErrorResponse> handleException(Exception e) {
         log.error("Exception Error ", e);
         ErrorResponse error = ErrorResponse.of(GlobalErrorCode.SERVER_ERROR);
-        return ResponseEntity.status(error.getHttpStatus()).body(error);
+//        return ResponseEntity.status(error.getHttpStatus()).body(error);
+        return ResponseEntity
+                .status(error.getHttpStatus())
+                .contentType(MediaType.APPLICATION_JSON)  // 강제 지정
+                .body(error);
     }
 
 }
