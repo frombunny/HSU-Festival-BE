@@ -17,7 +17,6 @@ public record UpdateBoothReq(
         @NotBlank(message = "부스 설명은 필수입니다.")
         String description,
 
-        @NotBlank(message = "운영 시간은 필수입니다.")
         String time
 ) {
 }
